@@ -69,6 +69,22 @@ app.post("/restaurant", (req, res) => {
     .catch((error) => console.log(error));
 });
 
+app.get("/restaurants/:id", (req, res) => {
+  const id = req.params.id;
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render("show", { restaurant }))
+    .catch((error) => console.log(error));
+});
+
+// app.get("/restaurants/:restaurant_id", (req, res) => {
+//   const id = req.params.restaurant_id;
+//   Restaurant.findOne({ id: `${id}` })
+//     .lean()
+//     .then((restaurant) => res.render("show", { restaurant }))
+//     .catch((error) => console.log(error));
+// });
+
 // app.get("/restaurants/:restaurant_id", (req, res) => {
 //   const restaurant = restaurantList.results.find(
 //     (restaurant) => restaurant.id.toString() === req.params.restaurant_id
