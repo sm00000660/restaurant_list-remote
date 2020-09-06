@@ -1,0 +1,89 @@
+<h1 class="restaurant-create-title">建立新餐廳</h1>
+
+<div class="container d-flex justify-content-center">
+  <!-- Material form contact -->
+  <div class="card restaurant-create-card w-75">
+
+    <h5 class="card-header info-color white-text text-center py-4">
+      <strong>填寫餐廳資訊</strong>
+    </h5>
+
+    <!--Card content-->
+    <div class="card-body px-lg-5 pt-0">
+
+      <!-- Form -->
+      <form class="text-center" style="color: #757575;" action="/restaurant" method="POST">
+
+        <!-- Name -->
+        <div class="md-form mt-3">
+          <input type="text" placeholder="中文店名" name="name" class="form-control mb-3" required>
+        </div>
+
+        <!-- Name_en -->
+        <div class="md-form mt-3">
+          <input type="text" placeholder="英文店名" name="name_en" class="form-control mb-3" required>
+        </div>
+
+        <!-- Category -->
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="category">菜系選擇</label>
+          </div>
+          <select class="custom-select" name="category" id="category" required>
+            <option value="中東料理">中東料理</option>
+            <option value="日本料理">日式料理</option>
+            <option value="泰式料理">泰式料理</option>
+            <option value="韓式料理">韓式料理</option>
+            <option value="中式料理">中式料理</option>
+            <option value="義式餐廳">義式餐廳</option>
+            <option value="美式">美式</option>
+            <option value="酒吧">酒吧</option>
+            <option value="咖啡">咖啡</option>
+            <option value="早午餐">早午餐</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+
+        <!-- Image -->
+        <div class="md-form mt-3">
+          <input type="text" placeholder="圖片連結" name="image" class="form-control mb-3">
+        </div>
+
+        <!-- Location -->
+        <div class="md-form mt-3">
+          <input type="text" placeholder="地址" name="location" class="form-control mb-3" required>
+        </div>
+
+        <!-- Phone -->
+        <div class="md-form mt-3">
+          <input type="text" placeholder="電話" name="phone" class="form-control mb-3">
+        </div>
+
+        <!-- Google_map -->
+        <div class="md-form mt-3">
+          <input type="text" placeholder="地圖連結" name="google_map" class="form-control mb-3">
+        </div>
+
+        <!-- rating -->
+        <div class="md-form mt-3">
+          <input type="number" step="0.1" min="0" max="5" placeholder="評分" name="rating" class="form-control mb-3"
+            required>
+        </div>
+
+        <!-- Description -->
+        <div class="md-form mt-3">
+          <input type="text" placeholder="餐廳介紹" name="description" class="form-control mb-3" required>
+        </div>
+
+        <!-- Send button -->
+        <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect"
+          type="submit">新增餐廳</button>
+
+      </form>
+      <!-- Form -->
+
+    </div>
+
+  </div>
+  <!-- Material form contact -->
+</div>

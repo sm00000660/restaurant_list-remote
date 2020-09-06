@@ -4,9 +4,12 @@ const app = express();
 const port = 3000;
 const exphbs = require("express-handlebars");
 const restaurantList = require("./models/seeds/restaurant.json");
+const bodtParser = require("body-parser");
 
 app.engine("hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", "hbs");
+
+app.use(bodtParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
@@ -27,14 +30,42 @@ db.once("open", () => {
   console.log("mongodb connected!");
 });
 
-// app.get("/", (req, res) => {
-//   res.render("index", { restaurant: restaurantList.results });
-// });
-
 app.get("/", (req, res) => {
   Restaurant.find()
     .lean()
     .then((restaurants) => res.render("index", { restaurants }))
+    .catch((error) => console.log(error));
+});
+
+app.get("/restaurant/new", (req, res) => {
+  return res.render("new");
+});
+
+app.post("/restaurant", (req, res) => {
+  const name = req.body.name;
+  const name_en = req.body.name_en;
+  const category = req.body.category;
+  const image = req.body.image;
+  const location = req.body.location;
+  const phone = req.body.phone;
+  const rating = req.body.rating;
+  const google_map = req.body.google_map;
+  const description = req.body.description;
+
+  return Restaurant.create({
+    name,
+    name_en,
+    category,
+    image,
+    location,
+    phone,
+    google_map,
+    rating,
+    description,
+  })
+    .then(() => {
+      res.redirect("/");
+    })
     .catch((error) => console.log(error));
 });
 
