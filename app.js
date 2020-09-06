@@ -120,20 +120,17 @@ app.post("/restaurants/:id/delete", (req, res) => {
     .catch((error) => console.log(error));
 });
 
-// app.get("/restaurants/:restaurant_id", (req, res) => {
-//   const restaurant = restaurantList.results.find(
-//     (restaurant) => restaurant.id.toString() === req.params.restaurant_id
-//   );
-//   res.render("show", { restaurant: restaurant });
-// });
-
-// app.get("/search", (req, res) => {
-//   const keyword = req.query.keyword;
-//   const restaurant = restaurantList.results.filter((restaurant) => {
-//     return restaurant.name.toLowerCase().includes(keyword.toLowerCase());
-//   });
-//   res.render("index", { restaurant: restaurant, keyword: keyword });
-// });
+app.get("/search", (req, res) => {
+  const keyword = req.query.keyword;
+  Restaurant.find()
+    .lean()
+    .then((restaurants) => {
+      return restaurants.filter((restaurant) =>
+        restaurant.name.toLowerCase().includes(req.query.keyword.toLowerCase())
+      );
+    })
+    .then((restaurants) => res.render("index", { restaurants, keyword }));
+});
 
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`);
