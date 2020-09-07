@@ -5,6 +5,7 @@ const port = 3000;
 const exphbs = require("express-handlebars");
 const restaurantList = require("./models/seeds/restaurant.json");
 const bodtParser = require("body-parser");
+const methodOverride = require("method-override");
 
 app.engine("hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", "hbs");
@@ -30,9 +31,12 @@ db.once("open", () => {
   console.log("mongodb connected!");
 });
 
+app.use(methodOverride("_method"));
+
 app.get("/", (req, res) => {
   Restaurant.find()
     .lean()
+    .sort({ _id: "asc" })
     .then((restaurants) => res.render("index", { restaurants }))
     .catch((error) => console.log(error));
 });
@@ -85,7 +89,7 @@ app.get("/restaurants/:id/edit", (req, res) => {
     .catch((error) => console.log(error));
 });
 
-app.post("/restaurants/:id/edit", (req, res) => {
+app.put("/restaurants/:id", (req, res) => {
   const id = req.params.id;
   const name = req.body.name;
   const name_en = req.body.name_en;
@@ -108,11 +112,11 @@ app.post("/restaurants/:id/edit", (req, res) => {
       restaurant.description = description;
       return restaurant.save();
     })
-    .then(() => res.redirect(`/restaurants/${id}`))
+    .then(() => res.redirect("/"))
     .catch((error) => console.log(error));
 });
 
-app.post("/restaurants/:id/delete", (req, res) => {
+app.delete("/restaurants/:id", (req, res) => {
   const id = req.params.id;
   return Restaurant.findById(id)
     .then((restaurant) => restaurant.remove())
