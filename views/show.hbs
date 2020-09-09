@@ -46,20 +46,29 @@
       </p>
 
       <p class="mb-5">
-        {{restaurant.description}}
+        簡介:{{restaurant.description}}
       </p>
 
-      <a href="/restaurants/{{restaurant._id}}/edit" class="m-2">
-        <div class="btn btn-outline-dark btn-sm z-depth-0 my-4" style="display: inline;">
-          Edit</div>
-      </a>
 
-      <form action="/restaurants/{{restaurant._id}}?_method=DELETE" method="POST" style="display: inline;">
-        <button type="submit" class="btn btn-outline-danger btn-sm z-depth-0 my-4">Delete</button>
-      </form>
+      <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="" style="max-width: 600px;">
+      <div class="row d-flex justify-content-center align-items-center">
+        <a href="/restaurants/{{restaurant._id}}/edit" class="m-2">
+          <div class="btn btn-outline-info btn-lg z-depth-0 my-4" style="display: inline;">
+            Edit</div>
+        </a>
 
-      <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="布娜飛比利時啤酒餐廳"
-        style="max-width: 600px;">
+        <a href="/" class="m-2">
+          <div class="btn btn-outline-secondary btn-lg z-depth-0 my-4" style="display: inline;">
+            Back</div>
+        </a>
+
+        <form action="/restaurants/{{restaurant._id}}?_method=DELETE" method="POST" style="display: inline;">
+          <button type="submit" class="btn btn-outline-danger btn-lg z-depth-0 my-4 ml-2">Delete</button>
+        </form>
+
+      </div>
+
+
     </div>
   </div>
 </div>
