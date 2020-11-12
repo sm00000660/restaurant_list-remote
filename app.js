@@ -9,6 +9,8 @@ const restaurantList = require("./models/seeds/restaurant.json");
 const routes = require("./routes");
 require("./config/mongoose");
 
+const usePassport = require('./config/passport')
+
 const app = express();
 const PORT = process.env.PORT || 3000
 
@@ -26,6 +28,8 @@ app.use(bodtParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.use(methodOverride("_method"));
+
+usePassport(app)
 
 app.use(routes);
 
