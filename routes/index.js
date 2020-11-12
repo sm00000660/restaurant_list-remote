@@ -6,9 +6,11 @@ const restaurants = require("./modules/restaurants");
 const users = require("./modules/users");
 const sort = require("./modules/sort");
 
-router.use("/", home);
-router.use("/restaurants", restaurants);
+const { authenticator } = require('../middleware/auth')
+
 router.use("/users", users);
-router.use("/sort", sort);
+router.use("/restaurants", authenticator, restaurants);
+router.use("/sort", authenticator, sort);
+router.use("/", authenticator, home);
 
 module.exports = router;
