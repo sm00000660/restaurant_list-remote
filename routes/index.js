@@ -8,8 +8,8 @@ const sort = require("./modules/sort");
 
 const { authenticator } = require('../middleware/auth')
 
-router.use("/users", users);
 router.use("/restaurants", authenticator, restaurants);
+router.use("/users", users);
 router.use("/sort", authenticator, sort);
 router.use("/", authenticator, home);
 

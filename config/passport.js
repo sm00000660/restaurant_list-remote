@@ -6,12 +6,9 @@ const User = require('../models/user')
 module.exports = app => {
   app.use(passport.initialize())
   app.use(passport.session())
-
   passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
-    console.log('123')
     User.findOne({ email })
     .then(user => {
-      console.log(user)
       if (!user) {
         return done(null, false, { message: 'That email is not registered!' })
       }
@@ -20,15 +17,14 @@ module.exports = app => {
       }
       return done(null, user)
     })
-    .catch(err => console.log(err))
+    .catch(err => done(err, false))
   }))
 
     passport.serializeUser((user, done) => {
-    console.log(user)
-    done(null, user._id)
+
+    done(null, user.id)
   })
   passport.deserializeUser((id, done) => {
-    console.log(user)
     User.findById(id)
       .lean()
       .then(user => done(null, user))

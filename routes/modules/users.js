@@ -6,13 +6,13 @@ const passport = require('passport')
 
 const User = require('../../models/user')
 
-router.use('/login', (req, res) => {
+router.get('/login', (req, res) => {
   res.render('login')
 })
 
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: 'users/register'
+  failureRedirect: 'users/login'
 }))
 
 router.get('/register', (req, res) => {
