@@ -5,6 +5,7 @@ const Restaurant = require("../../models/restaurant");
 
 router.get("/asc", (req, res) => {
   const userId = req.user._id
+  // const _id = req.params.id;
   Restaurant.find({ userId })
     .lean()
     .sort({ name: "asc" })
@@ -14,6 +15,7 @@ router.get("/asc", (req, res) => {
 
 router.get("/desc", (req, res) => {
   const userId = req.user._id
+  // const _id = req.params.id;
   Restaurant.find({ userId })
     .lean()
     .sort({ name: "desc" })
@@ -23,6 +25,7 @@ router.get("/desc", (req, res) => {
 
 router.get("/category", (req, res) => {
   const userId = req.user._id
+  // const _id = req.params.id;
   Restaurant.find({ userId })
     .lean()
     .sort({ category: "asc" })
@@ -32,6 +35,7 @@ router.get("/category", (req, res) => {
 
 router.get("/rating/asc", (req, res) => {
   const userId = req.user._id
+  // const _id = req.params.id;
   Restaurant.find({ userId })
     .lean()
     .sort({ rating: "desc" })
@@ -41,6 +45,7 @@ router.get("/rating/asc", (req, res) => {
 
 router.get("/rating/desc", (req, res) => {
   const userId = req.user._id
+  // const _id = req.params.id;
   Restaurant.find({ userId })
     .lean()
     .sort({ rating: "asc" })
